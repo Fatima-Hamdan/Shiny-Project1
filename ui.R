@@ -32,11 +32,14 @@ shinyUI(dashboardPage(
     
     tabItems(
       tabItem(tabName = "OverviewTab",
-            "first tab"),
-      tabItem(tabName = "DataTab", 
-            "second tab"),
+              img(src ='https://cdn.pixabay.com/photo/2015/12/08/04/15/new-york-1082447_1280.jpg', align = "center")),
+      tabItem(tabName = "DataTab", tags$h1(tags$b("To download the used dataset for the analysis, Copy this link:")),
+              tags$a("http://www1.nyc.gov/site/finance/taxes/property-rolling-sales-data.page" ),
+              img(src =' https://slack-files.com/T03H6UV5A-F913PESCX-5f2a87fb6c', align = "center"),
+              tags$h3(tags$i("This is the NYC Department of Finance.The Annualized Sales files on this site display properties
+                             sold in New York City(Bronx,Brooklyn,Manhattan,Queens,Staten Island) by year, beginning in 2003."))),
       tabItem(tabName = "MapTab", 
-              "third tab"),
+              box(width= 12,leafletOutput("mymap1"))),
       tabItem(tabName = "AnalysisTab", 
               fluidRow(
                 box( width = 12, fluidRow( 
@@ -53,14 +56,20 @@ shinyUI(dashboardPage(
                   # The id lets us use input$tabset1 on the server to find the current tab
                   id = "tabset1", width= "3000px",height = "500px",
                   tabPanel("Tables", fluidRow(box(width= 12,DT::dataTableOutput("Table")))),
-                  tabPanel("Graphs", fluidRow(box(width= 12,ggvisOutput("plot")))),
-                  tabPanel("Maps", "Tab content 3")
-                )))),
+                  tabPanel("Graphs", fluidRow(box(width= 12,ggvisOutput("plot1")),
+                                              box(width= 12,ggvisOutput("plot2")),
+                                              box(width= 12,ggvisOutput("plot3")))),
+                  tabPanel("Maps", fluidRow(box(checkboxInput("show", "Show States", value = FALSE)),
+                                            box(width= 12,leafletOutput("mymap")))
+                          
+                   ))))),
       
-      tabItem(tabName = "GoogleSearchTab", 
-              "fifth tab"),
+       tabItem(tabName = "GoogleSearchTab", tags$br(),tags$br(),tags$br(),tags$br(),tags$br(),
+              tags$h1(tags$b(tags$i("Under construction using gtrendsR library.. Investors can analyse people's location interest
+                      in the present moment before buyinh properties")))),
       tabItem(tabName = "ContactTab", 
-              "sixth tab")
+              tags$h1(tags$b("For more information about this project, Contact us!")),
+              tags$h2(tags$i("Email Address: fatima-hamdan@live.com")))
       
       )
     

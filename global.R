@@ -5,9 +5,11 @@ library(googleVis)
 library(ggvis)
 library(DT)
 library(dplyr)
+library(leaflet)
+library(maps)
 
 # import the data as csv file 
-ManhattanSales <- read.csv("rollingsales_Manhattan2017.csv",stringsAsFactors = FALSE)
+ManhattanSales <- read.csv("rollingsales_manhattan2017.csv",stringsAsFactors = FALSE)
 
 # lowercase column names
 names(ManhattanSales)<- tolower(names(ManhattanSales))

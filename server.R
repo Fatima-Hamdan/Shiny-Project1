@@ -42,12 +42,31 @@ shinyServer(function(input,output){
    
     
 })
-  
+        
   filtered_Data %>%
-    ggvis(~location_name, ~sale_price)%>%
-      layer_boxplots() %>%
-    bind_shiny("plot", "PriceRange")
+    ggvis(~location_name, ~sale_price,fill =~building_class_category)%>% group_by(location_name) %>%
+      layer_bars() %>%
+    bind_shiny("plot1", "PriceRange")
+  filtered_Data %>%
+    ggvis(~location_name, ~sale_price,fill =~building_class_category)%>% group_by(location_name) %>%
+    layer_bars() %>%
+    bind_shiny("plot2", "PriceRange")
+  filtered_Data %>%
+    ggvis(~location_name, ~sale_price,fill =~building_class_category)%>% group_by(location_name) %>%
+    layer_bars() %>%
+    bind_shiny("plot3", "PriceRange")
   
+  output$mymap <- renderLeaflet({
+    leaflet(Andrew) %>%
+      addProviderTiles("Esri.WorldStreetMap") %>%
+      addPolylines(~Long, ~Lat)
+  })
+  
+  output$mymap1 <- renderLeaflet({
+    leaflet(Andrew) %>%
+      addProviderTiles("Esri.WorldStreetMap") %>%
+      addPolylines(~Long, ~Lat)
+  })
   
   output$Table <- renderDT(filtered_Data(),options = list(scrollX = TRUE))
 
